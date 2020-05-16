@@ -12,6 +12,7 @@ import br.com.codenation.desafio.exceptions.JogadorNaoEncontradoException;
 import br.com.codenation.desafio.exceptions.TimeNaoEncontradoException;
 import br.com.codenation.jogador.Jogador;
 import br.com.codenation.time.Time;
+import java.util.stream.Collectors;
 
 public class DesafioMeuTimeApplication implements MeuTimeInterface {
     public List<Time> times = new ArrayList<>();
@@ -43,13 +44,10 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
     public void definirCapitao(Long idJogador) {
         Jogador capitao = this.buscarJogador(idJogador);
 
-        this.jogadores.stream()
-                .filter(jogador -> jogador.getIdTime()
-                .equals(capitao.getIdTime()) && capitao.getCapitao() == true)
-                .findAny()
-                .ifPresent(jogador -> jogador.setCapitao(false));
+        jogadores.stream().filter(Jogador::getCapitao).findFirst().ifPresent(result -> result.setCapitao(false));
 
         capitao.setCapitao(true);
+
     }
 
     @Desafio("buscarCapitaoDoTime")
