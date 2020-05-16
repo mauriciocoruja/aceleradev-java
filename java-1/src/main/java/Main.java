@@ -13,7 +13,10 @@ public class Main {
 
         //Inclui Jogador
         application.incluirJogador(1l, 1l, "Messi", LocalDate.of(1986, 10, 15), 98, new BigDecimal(1500000));
+        application.incluirJogador(2l, 1l, "Pedro", LocalDate.of(1986, 10, 15), 98, new BigDecimal(1500000));
         application.definirCapitao(1l);
+        System.out.println(application.jogadores);
+        application.definirCapitao(2l);
         System.out.println(application.jogadores);
 
 

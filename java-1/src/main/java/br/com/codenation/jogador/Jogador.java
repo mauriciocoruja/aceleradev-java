@@ -21,14 +21,15 @@ public class Jogador extends DesafioMeuTimeApplication {
         this.dataNascimento = dataNascimento;
         this.nivelHabilidade = nivelHabilidade;
         this.salario = salario;
+        this.capitao = false;
     }
 
     public boolean getCapitao() {
         return this.capitao;
     }
 
-    public void setCapitao(boolean ehCapitao) {
-        this.capitao = ehCapitao;
+    public void setCapitao(boolean tornarCapitao) {
+        this.capitao = tornarCapitao;
     }
 
     public Long getId() {

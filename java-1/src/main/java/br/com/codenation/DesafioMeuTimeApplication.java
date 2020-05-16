@@ -45,7 +45,9 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
         this.jogadores.stream()
                 .filter(jogador -> jogador.getIdTime()
-                .equals(capitao.getIdTime()) && capitao.getCapitao());
+                .equals(capitao.getIdTime()) && capitao.getCapitao() == true)
+                .findAny()
+                .ifPresent(jogador -> jogador.setCapitao(false));
 
         capitao.setCapitao(true);
     }
