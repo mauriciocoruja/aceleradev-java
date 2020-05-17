@@ -106,8 +106,9 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
     }
 
     @Desafio("buscarSalarioDoJogador")
-    public BigDecimal buscarSalarioDoJogador(Long idJogador) {
-        throw new UnsupportedOperationException();
+    public BigDecimal buscarSalarioDoJogador(Long idJogador) throws JogadorNaoEncontradoException{
+        Jogador jogador = buscarJogador(idJogador);
+        return jogador.getSalario();
     }
 
     @Desafio("buscarTopJogadores")
