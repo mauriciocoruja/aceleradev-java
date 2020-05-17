@@ -2,9 +2,7 @@ package br.com.codenation;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import br.com.codenation.desafio.annotation.Desafio;
 import br.com.codenation.desafio.app.MeuTimeInterface;
@@ -14,6 +12,7 @@ import br.com.codenation.desafio.exceptions.JogadorNaoEncontradoException;
 import br.com.codenation.desafio.exceptions.TimeNaoEncontradoException;
 import br.com.codenation.jogador.Jogador;
 import br.com.codenation.time.Time;
+
 import java.util.stream.Collectors;
 
 public class DesafioMeuTimeApplication implements MeuTimeInterface {
@@ -65,13 +64,15 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
     }
 
     @Desafio("buscarNomeJogador")
-    public String buscarNomeJogador(Long idJogador) {
-        throw new UnsupportedOperationException();
+    public String buscarNomeJogador(Long idJogador) throws JogadorNaoEncontradoException{
+        Jogador jogador = buscarJogador(idJogador);
+        return jogador.getNome();
     }
 
     @Desafio("buscarNomeTime")
-    public String buscarNomeTime(Long idTime) {
-        throw new UnsupportedOperationException();
+    public String buscarNomeTime(Long idTime) throws TimeNaoEncontradoException{
+        Time time = buscarTimePorId(idTime);
+        return time.getNome();
     }
 
     @Desafio("buscarJogadoresDoTime")
@@ -96,7 +97,7 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
     @Desafio("buscarTimes")
     public List<Long> buscarTimes() {
-        throw new UnsupportedOperationException();
+        return times.stream().map(Time::getId).collect(Collectors.toList());
     }
 
     @Desafio("buscarJogadorMaiorSalario")
@@ -119,7 +120,7 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
         throw new UnsupportedOperationException();
     }
 
-    public Jogador buscarJogador(Long idJogador) {
+    public Jogador buscarJogador(Long idJogador) throws JogadorNaoEncontradoException{
         return jogadores.stream()
                 .filter(jogador -> jogador.getId().equals(idJogador))
                 .findFirst().orElseThrow(() -> new JogadorNaoEncontradoException("Jogador não encontrado"));
