@@ -42,7 +42,7 @@ public class Jogador extends DesafioMeuTimeApplication {
     }
 
     public Long getIdTime() {
-        return idTime;
+        return this.idTime;
     }
 
     public void setIdTime(Long idTime) {
