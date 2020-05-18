@@ -86,7 +86,13 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
     @Desafio("buscarMelhorJogadorDoTime")
     public Long buscarMelhorJogadorDoTime(Long idTime) throws TimeNaoEncontradoException{
-        throw new UnsupportedOperationException();
+        Time time = buscarTimePorId(idTime);
+
+        return jogadores.stream()
+                .filter(jogador -> jogador.getIdTime().equals(time.getId()))
+                .max(Comparator.comparing(Jogador::getNivelHabilidade))
+                .get()
+                .getId();
     }
 
     @Desafio("buscarJogadorMaisVelho")
