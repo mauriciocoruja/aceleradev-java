@@ -133,7 +133,11 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
     @Desafio("buscarTopJogadores")
     public List<Long> buscarTopJogadores(Integer top) {
-        throw new UnsupportedOperationException();
+        return this.jogadores.stream()
+                .sorted(Comparator.comparing(Jogador::getNivelHabilidade).reversed().thenComparing(Jogador::getId))
+                .limit(top)
+                .map(Jogador::getId)
+                .collect(Collectors.toList());
     }
 
     @Desafio("buscarCorCamisaTimeDeFora")
