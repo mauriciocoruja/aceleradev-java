@@ -100,7 +100,8 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
         Time time = buscarTimePorId(idTime);
         return this.jogadores.stream()
                 .filter(jogador -> jogador.getIdTime().equals(time.getId()))
-                .min(Comparator.comparing(Jogador::getDataNascimento))
+                .min(Comparator.comparing(Jogador::getDataNascimento)
+                .thenComparingLong(Jogador::getId))
                 .get()
                 .getId();
     }
