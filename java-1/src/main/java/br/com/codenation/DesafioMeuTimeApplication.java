@@ -20,29 +20,31 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
     public List<Jogador> jogadores = new ArrayList<>();
 
     @Desafio("incluirTime")
-    public void incluirTime(Long id, String nome, LocalDate dataCriacao, String corUniformePrincipal, String corUniformeSecundario) {
+    public void incluirTime(Long id, String nome, LocalDate dataCriacao, String corUniformePrincipal,
+                            String corUniformeSecundario) throws IdentificadorUtilizadoException{
 
         if (times.stream().anyMatch(time -> time.getId().equals(id))) {
-            throw new IdentificadorUtilizadoException("Time com esse identificador já existe");
+            throw new IdentificadorUtilizadoException("ID de Time já utilizado");
         }
 
         times.add(new Time(id, nome, dataCriacao, corUniformePrincipal, corUniformeSecundario));
     }
 
     @Desafio("incluirJogador")
-    public void incluirJogador(Long id, Long idTime, String nome, LocalDate dataNascimento, Integer nivelHabilidade, BigDecimal salario) {
+    public void incluirJogador(Long id, Long idTime, String nome, LocalDate dataNascimento, Integer nivelHabilidade,
+                               BigDecimal salario) throws IdentificadorUtilizadoException {
 
         Time time = buscarTimePorId(idTime);
 
         if (jogadores.stream().anyMatch(jogador -> jogador.getId().equals(id))) {
-            throw new IdentificadorUtilizadoException("Identificador já utilizado");
+            throw new IdentificadorUtilizadoException("ID de Jogador já utilizado");
         }
 
         jogadores.add(new Jogador(id, time.getId(), nome, dataNascimento, nivelHabilidade, salario));
     }
 
     @Desafio("definirCapitao")
-    public void definirCapitao(Long idJogador) {
+    public void definirCapitao(Long idJogador) throws JogadorNaoEncontradoException{
         Jogador capitao = this.buscarJogadorPorId(idJogador);
         jogadores.stream()
                 .filter(times -> times.getIdTime().equals(capitao.getIdTime()))
