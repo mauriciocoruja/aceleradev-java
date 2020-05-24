@@ -88,6 +88,12 @@ public class Carro {
         }
 
         public Carro build() {
+            if (placa == null) {
+                throw new NullPointerException("É necessário informar uma placa");
+            }
+            if (cor == null) {
+                throw new NullPointerException("É necessário informar a cor");
+            }
             return new Carro(motorista, placa, cor);
         }
     }

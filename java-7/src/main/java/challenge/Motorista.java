@@ -88,12 +88,18 @@ public class Motorista {
         }
 
         public MotoristaBuilder withIdade(int idade) {
+            if (idade < 0) {
+                throw new IllegalArgumentException("Idade inválida");
+            }
             this.idade = idade;
             return this;
         }
 
         public MotoristaBuilder withPontos(int pontos) {
             this.pontos = pontos;
+            if (pontos < 0) {
+                throw new IllegalArgumentException("Pontuação inválida");
+            }
             return this;
         }
 
@@ -102,8 +108,13 @@ public class Motorista {
             return this;
         }
 
-
         public Motorista build() {
+            if (nome.isEmpty()) {
+                throw new NullPointerException("É necessário informar o nome");
+            }
+            if (habilitacao.isEmpty()) {
+                throw new NullPointerException("É necessário ter habilitação");
+            }
             return new Motorista(nome, idade, pontos, habilitacao);
         }
     }
