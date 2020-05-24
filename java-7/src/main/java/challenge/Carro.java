@@ -1,5 +1,7 @@
 package challenge;
 
+import java.util.Objects;
+
 public class Carro {
 
     private final Motorista motorista;
